@@ -109,7 +109,7 @@ const LiquidSlider = React.forwardRef<
           <motion.div 
             className="absolute pointer-events-none z-50"
             style={{
-              left: `${thumbPosition - 40}px`, 
+              left: `${thumbPosition - 30}px`, 
               top: '-160%',
             }}
             initial={springAnimation ? { 
@@ -150,18 +150,18 @@ const LiquidSlider = React.forwardRef<
             }}
           >
             <LiquidGlassView
-              width={80}
+              width={60}
               height={35}
               cornerRadius={17}
-              darknessOpacity={7}
-              darknessBlur={5}
-              lightnessOpacity={17}
-              lightnessBlur={12}
+              darknessOpacity={0}
+              darknessBlur={0}
+              lightnessOpacity={0}
+              lightnessBlur={0}
               centerDistortion={0}
               centerSize={17}
               preBlur={0}
               postBlur={0}
-              iridescence={20}
+              iridescence={5}
             />
           </motion.div>
         )}

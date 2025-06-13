@@ -12,15 +12,16 @@ export default function Home() {
     height: 200,
     cornerRadius: 25,
     darknessOpacity: 17,
-    darknessBlur: 5,
-    lightnessOpacity: 17,
+    darknessBlur: 0,
+    lightnessOpacity: 0,
     lightnessBlur: 15,
     centerDistortion: 68,
     centerSize: 15,
     preBlur: 7,
     postBlur: 0,
     iridescence: 20,
-    draggable: true
+    draggable: true,
+    darkMode: true
   })
 
   const updateSetting = (key: string, value: number) => {
@@ -32,21 +33,37 @@ export default function Home() {
   }
 
   return (
-    <main className="min-h-screen p-8 bg-gradient-to-br from-purple-50 to-blue-50">
+    <main className={`min-h-screen p-8 transition-all duration-300 ${
+      settings.darkMode 
+        ? 'bg-gradient-to-br from-gray-900 to-black' 
+        : 'bg-gradient-to-br from-purple-50 to-blue-50'
+    }`}>
       <style jsx>{`
         .gradient-text {
-          background: linear-gradient(135deg, #374151 0%, #6b7280 25%, #4b5563 50%, #1f2937 75%, #000000 100%);
+          background: ${settings.darkMode 
+            ? 'linear-gradient(135deg, #ffffff 0%, #e5e7eb 25%, #d1d5db 50%, #9ca3af 75%, #6b7280 100%)'
+            : 'linear-gradient(135deg, #374151 0%, #6b7280 25%, #4b5563 50%, #1f2937 75%, #000000 100%)'
+          };
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
           color: transparent;
-          text-shadow: 0 4px 16px rgba(75, 85, 99, 0.3);
-          filter: drop-shadow(0 4px 16px rgba(75, 85, 99, 0.2));
+          text-shadow: ${settings.darkMode 
+            ? '0 4px 16px rgba(229, 231, 235, 0.3)'
+            : '0 4px 16px rgba(75, 85, 99, 0.3)'
+          };
+          filter: ${settings.darkMode 
+            ? 'drop-shadow(0 4px 16px rgba(229, 231, 235, 0.2))'
+            : 'drop-shadow(0 4px 16px rgba(75, 85, 99, 0.2))'
+          };
         }
         
         .gradient-text:hover {
           transform: scale(1.02);
-          filter: drop-shadow(0 8px 32px rgba(75, 85, 99, 0.4));
+          filter: ${settings.darkMode 
+            ? 'drop-shadow(0 8px 32px rgba(229, 231, 235, 0.4))'
+            : 'drop-shadow(0 8px 32px rgba(75, 85, 99, 0.4))'
+          };
         }
       `}</style>
       
@@ -54,36 +71,96 @@ export default function Home() {
         Liquid Glass View
       </h1>
       
-      <p className="text-lg md:text-xl text-center text-gray-600 mb-5 font-medium">
-        Made by Thanh Dat (Joi) - <a href="https://github.com/joi-lightyears/liquid-glass-view" target="_blank" rel="noopener noreferrer" className="text-gray-600 font-bold hover:text-gray-800 transition-colors">Source code</a>
+      <p className={`text-lg md:text-xl text-center mb-5 font-medium transition-colors duration-300 ${
+        settings.darkMode ? 'text-gray-300' : 'text-gray-600'
+      }`}>
+        Made by Thanh Dat (Joi) - <a 
+          href="https://github.com/joi-lightyears/liquid-glass-view" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          className={`font-bold transition-colors ${
+            settings.darkMode 
+              ? 'text-gray-300 hover:text-white' 
+              : 'text-gray-600 hover:text-gray-800'
+          }`}
+        >
+          Source code
+        </a>
       </p>
 
       {/* Settings and Preview Section */}
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 items-stretch">
         {/* Controls */}
-        <div className="bg-white/80 backdrop-blur-sm p-6 rounded-3xl shadow-lg xl:order-2 h-fit">
-          <h2 className="text-xl font-semibold mb-6">Customize Your Glass</h2>
+        <div className={`p-6 rounded-3xl shadow-lg xl:order-2 h-fit transition-all duration-300 ${
+          settings.darkMode 
+            ? 'bg-gray-800/90 backdrop-blur-sm' 
+            : 'bg-white/80 backdrop-blur-sm'
+        }`}>
+          <h2 className={`text-xl font-semibold mb-6 transition-colors duration-300 ${
+            settings.darkMode ? 'text-white' : 'text-gray-900'
+          }`}>
+            Customize Your Glass
+          </h2>
           
-          {/* Draggable Toggle */}
-          <div className="mb-6 p-4 bg-gray-50 rounded-2xl">
-            <div className="flex items-center justify-between">
-              <div>
-                <Label htmlFor="draggable" className="text-base font-medium">Enable Dragging</Label>
-                <p className="text-sm text-gray-600 mt-1">Allow the glass view to be dragged around</p>
+          {/* Toggle Controls */}
+          <div className={`mb-6 p-4 rounded-2xl transition-colors duration-300 ${
+            settings.darkMode ? 'bg-gray-700' : 'bg-gray-50'
+          }`}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Draggable Toggle */}
+              <div className="flex items-center justify-between">
+                <div>
+                  <Label htmlFor="draggable" className={`text-base font-medium transition-colors duration-300 ${
+                    settings.darkMode ? 'text-white' : 'text-gray-900'
+                  }`}>
+                    Enable Dragging
+                  </Label>
+                  <p className={`text-sm mt-1 transition-colors duration-300 ${
+                    settings.darkMode ? 'text-gray-300' : 'text-gray-600'
+                  }`}>
+                    Allow the glass view to be dragged
+                  </p>
+                </div>
+                <Switch
+                  id="draggable"
+                  checked={settings.draggable}
+                  onCheckedChange={(checked) => updateBooleanSetting("draggable", checked)}
+                  className="data-[state=checked]:bg-[#34c85a]"
+                />
               </div>
-              <Switch
-                id="draggable"
-                checked={settings.draggable}
-                onCheckedChange={(checked) => updateBooleanSetting("draggable", checked)}
-                className="data-[state=checked]:bg-[#34c85a]"
-              />
+
+              {/* Dark Mode Toggle */}
+              <div className="flex items-center justify-between">
+                <div>
+                  <Label htmlFor="darkMode" className={`text-base font-medium transition-colors duration-300 ${
+                    settings.darkMode ? 'text-white' : 'text-gray-900'
+                  }`}>
+                    Dark Mode
+                  </Label>
+                  <p className={`text-sm mt-1 transition-colors duration-300 ${
+                    settings.darkMode ? 'text-gray-300' : 'text-gray-600'
+                  }`}>
+                    Switch to dark theme
+                  </p>
+                </div>
+                <Switch
+                  id="darkMode"
+                  checked={settings.darkMode}
+                  onCheckedChange={(checked) => updateBooleanSetting("darkMode", checked)}
+                  className="data-[state=checked]:bg-[#34c85a]"
+                />
+              </div>
             </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-4">
               <div>
-                <Label htmlFor="width">Width: {settings.width}px</Label>
+                <Label htmlFor="width" className={`transition-colors duration-300 ${
+                  settings.darkMode ? 'text-gray-200' : 'text-gray-900'
+                }`}>
+                  Width: {settings.width}px
+                </Label>
                 <LiquidSlider
                   id="width"
                   min={100}
@@ -95,7 +172,11 @@ export default function Home() {
               </div>
 
               <div>
-                <Label htmlFor="height">Height: {settings.height}px</Label>
+                <Label htmlFor="height" className={`transition-colors duration-300 ${
+                  settings.darkMode ? 'text-gray-200' : 'text-gray-900'
+                }`}>
+                  Height: {settings.height}px
+                </Label>
                 <LiquidSlider
                   id="height"
                   min={100}
@@ -107,18 +188,26 @@ export default function Home() {
               </div>
 
               <div>
-                <Label htmlFor="cornerRadius">Corner Radius: {settings.cornerRadius}px</Label>
+                <Label htmlFor="cornerRadius" className={`transition-colors duration-300 ${
+                  settings.darkMode ? 'text-gray-200' : 'text-gray-900'
+                }`}>
+                  Corner Radius: {settings.cornerRadius}px
+                </Label>
                 <LiquidSlider
                   id="cornerRadius"
                   min={0}
-                  max={100}
+                  max={150}
                   value={[settings.cornerRadius]}
                   onValueChange={(value) => updateSetting("cornerRadius", value[0])}
                 />
               </div>
 
               <div>
-                <Label htmlFor="darknessOpacity">Darkness Opacity: {settings.darknessOpacity}%</Label>
+                <Label htmlFor="darknessOpacity" className={`transition-colors duration-300 ${
+                  settings.darkMode ? 'text-gray-200' : 'text-gray-900'
+                }`}>
+                  Darkness Opacity: {settings.darknessOpacity}%
+                </Label>
                 <LiquidSlider
                   id="darknessOpacity"
                   min={0}
@@ -129,7 +218,11 @@ export default function Home() {
               </div>
 
               <div>
-                <Label htmlFor="darknessBlur">Darkness Blur: {settings.darknessBlur}px</Label>
+                <Label htmlFor="darknessBlur" className={`transition-colors duration-300 ${
+                  settings.darkMode ? 'text-gray-200' : 'text-gray-900'
+                }`}>
+                  Darkness Blur: {settings.darknessBlur}px
+                </Label>
                 <LiquidSlider
                   id="darknessBlur"
                   min={0}
@@ -140,7 +233,11 @@ export default function Home() {
               </div>
 
               <div>
-                <Label htmlFor="lightnessOpacity">Lightness Opacity: {settings.lightnessOpacity}%</Label>
+                <Label htmlFor="lightnessOpacity" className={`transition-colors duration-300 ${
+                  settings.darkMode ? 'text-gray-200' : 'text-gray-900'
+                }`}>
+                  Lightness Opacity: {settings.lightnessOpacity}%
+                </Label>
                 <LiquidSlider
                   id="lightnessOpacity"
                   min={0}
@@ -153,7 +250,11 @@ export default function Home() {
 
             <div className="space-y-4">
               <div>
-                <Label htmlFor="lightnessBlur">Lightness Blur: {settings.lightnessBlur}px</Label>
+                <Label htmlFor="lightnessBlur" className={`transition-colors duration-300 ${
+                  settings.darkMode ? 'text-gray-200' : 'text-gray-900'
+                }`}>
+                  Lightness Blur: {settings.lightnessBlur}px
+                </Label>
                 <LiquidSlider
                   id="lightnessBlur"
                   min={0}
@@ -164,7 +265,11 @@ export default function Home() {
               </div>
 
               <div>
-                <Label htmlFor="centerDistortion">Center Distortion: {settings.centerDistortion}</Label>
+                <Label htmlFor="centerDistortion" className={`transition-colors duration-300 ${
+                  settings.darkMode ? 'text-gray-200' : 'text-gray-900'
+                }`}>
+                  Center Distortion: {settings.centerDistortion}
+                </Label>
                 <LiquidSlider
                   id="centerDistortion"
                   min={0}
@@ -175,7 +280,11 @@ export default function Home() {
               </div>
 
               <div>
-                <Label htmlFor="centerSize">Center Size: {settings.centerSize}</Label>
+                <Label htmlFor="centerSize" className={`transition-colors duration-300 ${
+                  settings.darkMode ? 'text-gray-200' : 'text-gray-900'
+                }`}>
+                  Center Size: {settings.centerSize}
+                </Label>
                 <LiquidSlider
                   id="centerSize"
                   min={0}
@@ -186,7 +295,11 @@ export default function Home() {
               </div>
 
               <div>
-                <Label htmlFor="preBlur">Pre-blur: {settings.preBlur}</Label>
+                <Label htmlFor="preBlur" className={`transition-colors duration-300 ${
+                  settings.darkMode ? 'text-gray-200' : 'text-gray-900'
+                }`}>
+                  Pre-blur: {settings.preBlur}
+                </Label>
                 <LiquidSlider
                   id="preBlur"
                   min={0}
@@ -197,7 +310,11 @@ export default function Home() {
               </div>
 
               <div>
-                <Label htmlFor="postBlur">Post-blur: {settings.postBlur}</Label>
+                <Label htmlFor="postBlur" className={`transition-colors duration-300 ${
+                  settings.darkMode ? 'text-gray-200' : 'text-gray-900'
+                }`}>
+                  Post-blur: {settings.postBlur}
+                </Label>
                 <LiquidSlider
                   id="postBlur"
                   min={0}
@@ -208,7 +325,11 @@ export default function Home() {
               </div>
 
               <div>
-                <Label htmlFor="iridescence">Iridescence: {settings.iridescence}</Label>
+                <Label htmlFor="iridescence" className={`transition-colors duration-300 ${
+                  settings.darkMode ? 'text-gray-200' : 'text-gray-900'
+                }`}>
+                  Iridescence: {settings.iridescence}
+                </Label>
                 <LiquidSlider
                   id="iridescence"
                   min={0}
