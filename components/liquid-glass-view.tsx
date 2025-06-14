@@ -47,7 +47,6 @@ export default function LiquidGlassView({
 }: LiquidGlassViewProps) {
   const id = useId()
   const [filterId] = useState(`liquid-glass-filter-${id.replace(/:/g, '')}`)
-  const [isHovered, setIsHovered] = useState(false)
   const [dragDirection, setDragDirection] = useState<'none' | 'horizontal' | 'vertical'>('none')
   const lastDragPos = useRef({ x: 0, y: 0 })
 
@@ -234,8 +233,6 @@ export default function LiquidGlassView({
         } : {
           scale: 1
         }) : undefined}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
         onDragStart={handleDragStart}
         onDrag={handleDrag}
         onDragEnd={handleDragEnd}
