@@ -2,6 +2,14 @@
 
 A beautiful glass morphism effect component for React applications. This component creates a stunning liquid glass effect that can be animated and interacted with.
 
+## Demo
+
+[![Liquid Glass View Demo](https://img.youtube.com/vi/LEJ2JOk6kts/maxresdefault.jpg)](https://www.youtube.com/watch?v=LEJ2JOk6kts)
+
+🔗 [Live Demo Website](https://tdliquidglassv2.netlify.app/)
+
+
+
 ## Features
 
 - 🎨 Beautiful glass morphism effect
@@ -94,7 +102,6 @@ function Card() {
 ## Requirements
 
 - React 16.8.0 or later
-- Framer Motion 4.0.0 or later
 
 ## License
 
