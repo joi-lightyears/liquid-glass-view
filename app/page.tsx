@@ -164,7 +164,7 @@ export default function Home() {
                 <LiquidSlider
                   id="width"
                   min={100}
-                  max={600}
+                  max={300}
                   step={10}
                   value={[settings.width]}
                   onValueChange={(value) => updateSetting("width", value[0])}
@@ -180,7 +180,7 @@ export default function Home() {
                 <LiquidSlider
                   id="height"
                   min={100}
-                  max={400}
+                  max={300}
                   step={10}
                   value={[settings.height]}
                   onValueChange={(value) => updateSetting("height", value[0])}
