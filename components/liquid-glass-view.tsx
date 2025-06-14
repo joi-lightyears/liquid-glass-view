@@ -255,7 +255,7 @@ export default function LiquidGlassView({
             top: "-43px",
             left: "-43px",
             width: "calc(100% + 86px)",
-            height: "calc(100% + 43px)",
+            height: "calc(100% + 86px)",
             backdropFilter: `url(#${filterId})`,
             pointerEvents: "none",
             zIndex: 1,
