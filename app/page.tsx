@@ -354,7 +354,6 @@ export default function Home() {
 
         {/* Live Preview */}
         <div className="relative bg-[url('/images/whale-background.jpeg')] bg-cover bg-center rounded-3xl flex items-center justify-center xl:order-1">
-          <div className="flex items-center justify-center p-8">
           <LiquidGlassView {...settings} className="flex items-center justify-center">
             <div className="text-center">
               <h3 className="text-2xl font-bold mb-2 text-white">
@@ -365,7 +364,6 @@ export default function Home() {
               </p>
             </div>
           </LiquidGlassView>
-          </div>
         </div>
       </div>
     </main>
