@@ -165,7 +165,7 @@ export default function Home() {
                   id="width"
                   min={100}
                   max={300}
-                  step={10}
+                  step={1}
                   value={[settings.width]}
                   onValueChange={(value) => updateSetting("width", value[0])}
                 />
@@ -181,7 +181,7 @@ export default function Home() {
                   id="height"
                   min={100}
                   max={300}
-                  step={10}
+                  step={1}
                   value={[settings.height]}
                   onValueChange={(value) => updateSetting("height", value[0])}
                 />
