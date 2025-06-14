@@ -2,7 +2,7 @@
 
 A beautiful, interactive React component that creates a stunning liquid glass effect using advanced SVG filters and CSS backdrop-filter. Built with Next.js, TypeScript, and Framer Motion.
 
-![Liquid Glass View Demo](https://img.shields.io/badge/Demo-Live-brightgreen)
+[![Liquid Glass View Demo](https://img.shields.io/badge/Demo-Live-brightgreen)](https://tdliquidglassv2.netlify.app/)
 
 ## ✨ Features
 
