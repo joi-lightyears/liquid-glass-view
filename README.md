@@ -8,7 +8,7 @@ A beautiful glass morphism effect component for React applications. This compone
 
 🔗 [Live Demo Website](https://tdliquidglassv2.netlify.app/)
 
-
+📦 [NPM Package](https://www.npmjs.com/package/react-liquid-glass-view)
 
 ## Features
 

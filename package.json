@@ -1,6 +1,6 @@
 {
   "name": "react-liquid-glass-view",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "A beautiful glass morphism effect component for React applications",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
