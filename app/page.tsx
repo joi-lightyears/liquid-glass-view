@@ -21,7 +21,8 @@ export default function Home() {
     postBlur: 0,
     iridescence: 20,
     draggable: true,
-    darkMode: true
+    darkMode: true,
+    transitionAnimationSpring: true
   })
 
   const updateSetting = (key: string, value: number) => {
@@ -96,10 +97,19 @@ export default function Home() {
             ? 'bg-gray-800/90 backdrop-blur-sm' 
             : 'bg-white/80 backdrop-blur-sm'
         }`}>
-          <h2 className={`text-xl font-semibold mb-6 transition-colors duration-300 ${
+          <h2 className={`text-xl font-semibold mb-6 flex justify-between items-center transition-colors duration-300 ${
             settings.darkMode ? 'text-white' : 'text-gray-900'
           }`}>
-            Customize Your Glass
+            <span>Customize Your Glass</span>
+            <div className="flex items-center gap-2">
+              <Label htmlFor="darkMode" className="text-sm">Dark Mode</Label>
+              <Switch
+                id="darkMode"
+                checked={settings.darkMode}
+                onCheckedChange={(checked) => updateBooleanSetting("darkMode", checked)}
+                className="data-[state=checked]:bg-[#34c85a]"
+              />
+            </div>
           </h2>
           
           {/* Toggle Controls */}
@@ -129,24 +139,24 @@ export default function Home() {
                 />
               </div>
 
-              {/* Dark Mode Toggle */}
+              {/* Transition Animation Toggle */}
               <div className="flex items-center justify-between">
                 <div>
-                  <Label htmlFor="darkMode" className={`text-base font-medium transition-colors duration-300 ${
+                  <Label htmlFor="transitionAnimationSpring" className={`text-base font-medium transition-colors duration-300 ${
                     settings.darkMode ? 'text-white' : 'text-gray-900'
                   }`}>
-                    Dark Mode
+                    Transition
                   </Label>
                   <p className={`text-sm mt-1 transition-colors duration-300 ${
                     settings.darkMode ? 'text-gray-300' : 'text-gray-600'
                   }`}>
-                    Switch to dark theme
+                    Enable smooth spring transitions
                   </p>
                 </div>
                 <Switch
-                  id="darkMode"
-                  checked={settings.darkMode}
-                  onCheckedChange={(checked) => updateBooleanSetting("darkMode", checked)}
+                  id="transitionAnimationSpring"
+                  checked={settings.transitionAnimationSpring}
+                  onCheckedChange={(checked) => updateBooleanSetting("transitionAnimationSpring", checked)}
                   className="data-[state=checked]:bg-[#34c85a]"
                 />
               </div>

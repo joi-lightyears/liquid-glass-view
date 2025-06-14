@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import * as SliderPrimitive from "@radix-ui/react-slider"
-import { motion, AnimatePresence } from "framer-motion"
+import { motion } from "framer-motion"
 import { cn } from "@/lib/utils"
 import LiquidGlassView from "./liquid-glass-view"
 
@@ -117,68 +117,40 @@ const LiquidSlider = React.forwardRef<
         />
       </SliderPrimitive.Root>
       
-      <AnimatePresence>
-        {isDragging && (
-          <motion.div 
-            className="absolute pointer-events-none z-50"
-            style={{
-              left: `${bubblePosition}px`,
-              top: '-160%',
-            }}
-            initial={springAnimation ? { 
-              scale: 0, 
-              opacity: 0,
-            } : { 
-              scale: 0.8, 
-              opacity: 0 
-            }}
-            animate={springAnimation ? { 
-              scale: 1, 
-              opacity: 1,
-              transition: {
-                type: "spring",
-                damping: 15,
-                stiffness: 300,
-                mass: 0.8
-              }
-            } : { 
-              scale: 1, 
-              opacity: 1,
-              transition: { duration: 0.2 }
-            }}
-            exit={springAnimation ? { 
-              scale: 0.8, 
-              opacity: 0,
-              y: 10,
-              transition: {
-                type: "spring",
-                damping: 20,
-                stiffness: 400,
-                mass: 0.5
-              }
-            } : { 
-              scale: 0.8, 
-              opacity: 0,
-              transition: { duration: 0.15 }
-            }}
-          >
-            <LiquidGlassView
-              width={60}
-              height={35}
-              cornerRadius={17}
-              darknessOpacity={0}
-              darknessBlur={0}
-              lightnessOpacity={0}
-              lightnessBlur={0}
-              centerDistortion={0}
-              centerSize={17}
-              preBlur={0}
-              postBlur={0}
-              iridescence={5}
-            />
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <motion.div 
+        className="absolute pointer-events-none z-50"
+        style={{
+          left: `${bubblePosition}px`,
+          top: '-160%',
+          display: isDragging ? 'block' : 'none',
+        }}
+        animate={{
+          width: isDragging ? 60 : 30,
+          height: isDragging ? 35 : 20,
+          transition: {
+            type: "spring",
+            damping: 15,
+            stiffness: 300,
+            mass: 0.8
+          }
+        }}
+      >
+        <LiquidGlassView
+          width={isDragging ? 60 : 30}
+          height={isDragging ? 35 : 20}
+          cornerRadius={17}
+          darknessOpacity={0}
+          darknessBlur={0}
+          lightnessOpacity={0}
+          lightnessBlur={0}
+          centerDistortion={0}
+          centerSize={17}
+          preBlur={0}
+          postBlur={0}
+          iridescence={5}
+          // transitionAnimationSpring={true}
+        />
+      </motion.div>
     </div>
   )
 })

@@ -22,6 +22,7 @@ interface LiquidGlassViewProps {
   style?: React.CSSProperties
   draggable?: boolean
   dragAnimation?: boolean
+  transitionAnimationSpring?: boolean
 }
 
 export default function LiquidGlassView({
@@ -42,6 +43,7 @@ export default function LiquidGlassView({
   style = {},
   draggable = false,
   dragAnimation = true,
+  transitionAnimationSpring = false,
 }: LiquidGlassViewProps) {
   const id = useId()
   const [filterId] = useState(`liquid-glass-filter-${id.replace(/:/g, '')}`)
@@ -171,10 +173,33 @@ export default function LiquidGlassView({
         drag={draggable}
         dragMomentum={false}
         dragElastic={0.1}
+        initial={false}
         animate={{
+          width: containerWidth,
+          height: containerHeight,
           opacity: 1,
           scale: 1,
-          transition: { type: "spring", damping: 20, stiffness: 250 },
+        }}
+        transition={transitionAnimationSpring ? {
+          width: {
+            type: "spring",
+            damping: 15,
+            stiffness: 300,
+            mass: 0.8
+          },
+          height: {
+            type: "spring",
+            damping: 15,
+            stiffness: 300,
+            mass: 0.8
+          },
+          scale: {
+            type: "spring",
+            damping: 20,
+            stiffness: 250
+          }
+        } : {
+          duration: 0
         }}
         exit={{
           opacity: 0,
@@ -216,8 +241,6 @@ export default function LiquidGlassView({
         onDragEnd={handleDragEnd}
         className={`liquid-glass-container relative ${className} ${draggable ? "cursor-move" : ""}`}
         style={{
-          width: containerWidth,
-          height: containerHeight,
           userSelect: "none",
           zIndex: draggable ? 100 : 10,
           ...style,
