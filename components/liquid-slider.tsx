@@ -20,6 +20,7 @@ const LiquidSlider = React.forwardRef<
 >(({ className, label, value, onValueChange, springAnimation = true, ...props }, ref) => {
   const [isDragging, setIsDragging] = React.useState(false)
   const [thumbPosition, setThumbPosition] = React.useState(0)
+  const [bubblePosition, setBubblePosition] = React.useState(0)
   const sliderRef = React.useRef<HTMLDivElement>(null)
 
   const calculateThumbPosition = React.useCallback((currentValue: number[]) => {
@@ -28,6 +29,18 @@ const LiquidSlider = React.forwardRef<
       const sliderRect = sliderRef.current.getBoundingClientRect()
       const thumbPos = (percentage / 100) * sliderRect.width
       setThumbPosition(thumbPos)
+      
+      const bubbleWidth = 60
+      const sliderWidth = sliderRect.width
+      const bufferSpace = -10 
+      
+      const idealBubbleLeft = thumbPos - (bubbleWidth / 2)
+      
+      const minLeft = bufferSpace
+      const maxLeft = sliderWidth - bubbleWidth - bufferSpace
+      const constrainedLeft = Math.max(minLeft, Math.min(maxLeft, idealBubbleLeft))
+      
+      setBubblePosition(constrainedLeft)
     }
   }, [props.min, props.max])
 
@@ -109,7 +122,7 @@ const LiquidSlider = React.forwardRef<
           <motion.div 
             className="absolute pointer-events-none z-50"
             style={{
-              left: `${thumbPosition - 30}px`, 
+              left: `${bubblePosition}px`,
               top: '-160%',
             }}
             initial={springAnimation ? { 
