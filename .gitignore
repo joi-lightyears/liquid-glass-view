@@ -26,3 +26,29 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 .env
+
+# Dependencies
+node_modules
+.pnp
+.pnp.js
+
+# Build output
+dist
+types
+
+# IDE
+.vscode
+.idea
+*.sublime-project
+*.sublime-workspace
+
+# Environment
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# OS
+.DS_Store
+Thumbs.db
